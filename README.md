@@ -5,13 +5,18 @@ Automated install of Motion for Raspbian
 
 # Install
 
+```
 sudo yum install ansible
-
+```
 
 # Vars
 
 
 # Run
+```
+ansible-playbook -i inventory.txt playbook.yml
+``` 
+
 # Steps
 1. create usb
 
