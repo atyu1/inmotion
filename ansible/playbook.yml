@@ -5,6 +5,10 @@
     usb_uuid: '699ca72b-68e4-45b8-8038-20833b6056ae'
     target_dir: '/.syspi'
   tasks:
+   - name: Enable camera
+     command: raspi-config nonint do_camera 0
+     become: yes
+
    - name: Install motion
      apt:
        name: motion
@@ -45,4 +49,8 @@
      modprobe:
        name: bcm2835-v4l2
        state: present
+     become: yes
+
+   - name: Start motion
+     command: motion
      become: yes
