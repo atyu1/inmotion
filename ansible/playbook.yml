@@ -32,8 +32,7 @@
        path: '{{ target_dir }}'
        src: UUID={{ usb_uuid }}
        fstype: ext4
-       opts: noatime
-       state: present
+       state: mounted
      become: yes
 
    - name: Start motion
