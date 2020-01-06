@@ -1,0 +1,1 @@
+pi ansible_host=pia ansible_connection=ssh ansible_user=atyu 
