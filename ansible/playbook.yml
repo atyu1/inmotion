@@ -1,6 +1,49 @@
 -
   name: Install Motion
   hosts: pi
+  vars: 
+    usb_uuid: '699ca72b-68e4-45b8-8038-20833b6056ae'
+    target_dir: '/.syspi'
   tasks:
    - name: Install motion
-   - 
+     apt:
+       name: motion
+       state: present
+     become: yes
+
+   - name: Copy Motion config
+     copy:
+       src: ../motion.conf
+       dest: /etc/motion/motion.conf
+       backup: yes
+     become: yes
+
+   - name: Change target dir owner
+     file:
+       path: '{{ target_dir }}'
+       state: directory
+       owner: atyu
+       group: atyu
+       mode: '1777'
+     become: yes
+
+   - name: Attach USB
+     mount:
+       path: '{{ target_dir }}'
+       src: UUID={{ usb_uuid }}
+       fstype: ext4
+       opts: noatime
+       state: present
+     become: yes
+
+   - name: Start motion
+     service:
+       name: motion
+       state: started
+     become: yes
+
+   - name: Enable RPI camera video device
+     modprobe:
+       name: bcm2835-v4l2
+       state: present
+     become: yes
