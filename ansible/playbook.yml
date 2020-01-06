@@ -39,16 +39,16 @@
        state: mounted
      become: yes
 
-   - name: Start motion
-     service:
-       name: motion
-       state: started
-     become: yes
-
    - name: Enable RPI camera video device
      modprobe:
        name: bcm2835-v4l2
        state: present
+     become: yes
+
+   - name: Start motion
+     service:
+       name: motion
+       state: restarted
      become: yes
 
    - name: Start motion
