@@ -18,6 +18,9 @@ ansible-playbook -i inventory.txt playbook.yml
 ``` 
 
 # Steps
+1. enable camera
+sudo raspi-config nonint do_camera 0
+
 1. create usb
 
 atyu@pia:~ $ blkid
